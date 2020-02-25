@@ -2,6 +2,9 @@
 Loop from i = 1 to n - 1
 
 Pick arr[i] and insert it into  sorted sequence arr[0 to i - 1]
+
+If elements are sorted in decreasing order (reverse): O(n^2)
+If elements are already sorted: O(n)
 """
 import unittest
 

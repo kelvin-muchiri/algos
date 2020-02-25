@@ -1,28 +1,11 @@
 """
-Divide and conquer
 
-Pick element as pivot and partition the array around the picked pivot.
-
-Ways of picking the pivot:
-
-1. Always pick the first element
-2. Always pick the last element
-3. Pick random
-4. Pick median
-
-The key process is the partition process. Pick x of array as pivot,
-put x at its correct position in sorted array, put elements smaller
-than x before x, elements greater than x after x. Do this in linear
-time.
-
-Analysis:
-
-T(n) = T(k) + T(n-k-1) + O(n)
 """
 import unittest
+import random
 
 
-def partition(arr, low, high):
+def _partition(arr, low, high):
     """
     Pick last element of array as pivot, place element at its correct
     position, place all smaller elements to the left, larger elements
@@ -45,6 +28,14 @@ def partition(arr, low, high):
     # Now have pivot in its place
     arr[i + 1], arr[high] = arr[high], arr[i + 1]
     return i + 1
+
+def partition(arr, low, high):
+    """Generate a random pivot, swap last element with random pivot."""
+    random_pivot = random.randrange(low, high)
+
+    # Swap last element and random pivot
+    arr[high], arr[random_pivot] = arr[random_pivot], arr[high]
+    return _partition(arr, low, high)
 
 
 def quicksort(arr, low, high):
