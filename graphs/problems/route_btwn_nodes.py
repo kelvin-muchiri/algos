@@ -2,6 +2,8 @@
 Given a directed graph, design an algorithm to find out whether there is a route between two nodes.
 """
 
+import unittest
+
 
 class AdjNode:
     def __init__(self, data):
@@ -75,23 +77,34 @@ class Graph:
         return False
 
 
-if __name__ == "__main__":
-    V = 5
-    graph = Graph(V)
-    graph.add_edge(0, 1)
-    graph.add_edge(0, 4)
-    graph.add_edge(1, 2)
-    graph.add_edge(1, 3)
-    graph.add_edge(1, 4)
-    graph.add_edge(2, 3)
-    graph.add_edge(3, 4)
-    graph.print_graph()
+class SolutionTestCase(unittest.TestCase):
+    def setUp(self):
+        super().setUp()
+        V = 5
+        self.graph = Graph(V)
+        self.graph.add_edge(0, 1)
+        self.graph.add_edge(0, 4)
+        self.graph.add_edge(1, 2)
+        self.graph.add_edge(1, 3)
+        self.graph.add_edge(1, 4)
+        self.graph.add_edge(2, 3)
+        self.graph.add_edge(3, 4)
 
-    # True
-    print(graph.is_there_route_between(0, 1))
-    # True
-    print(graph.is_there_route_between(2, 3))
-    # False
-    print(graph.is_there_route_between(3, 2))
-    # True
-    print(graph.is_there_route_between(0, 2))
+    def test_0_1(self):
+        self.assertTrue(self.graph.is_there_route_between(0, 1))
+
+    def test_2_3(self):
+        self.assertTrue(self.graph.is_there_route_between(2, 3))
+
+    def test_3_2(self):
+        self.assertFalse(self.graph.is_there_route_between(3, 2))
+
+    def test_0_2(self):
+        self.assertTrue(self.graph.is_there_route_between(0, 2))
+
+    def test_0_3(self):
+        self.assertTrue(self.graph.is_there_route_between(0, 3))
+
+
+if __name__ == "__main__":
+    unittest.main()
