@@ -80,30 +80,22 @@ class Graph:
 class SolutionTestCase(unittest.TestCase):
     def setUp(self):
         super().setUp()
-        V = 5
+        V = 6
         self.graph = Graph(V)
         self.graph.add_edge(0, 1)
-        self.graph.add_edge(0, 4)
         self.graph.add_edge(1, 2)
-        self.graph.add_edge(1, 3)
-        self.graph.add_edge(1, 4)
-        self.graph.add_edge(2, 3)
-        self.graph.add_edge(3, 4)
+        self.graph.add_edge(2, 1)
+        self.graph.add_edge(2, 0)
+        self.graph.add_edge(3, 2)
+        self.graph.add_edge(4, 5)
+        self.graph.add_edge(5, 4)
 
     def test_0_1(self):
+        self.graph.print_graph()
         self.assertTrue(self.graph.is_there_route_between(0, 1))
 
-    def test_2_3(self):
-        self.assertTrue(self.graph.is_there_route_between(2, 3))
-
-    def test_3_2(self):
-        self.assertFalse(self.graph.is_there_route_between(3, 2))
-
-    def test_0_2(self):
-        self.assertTrue(self.graph.is_there_route_between(0, 2))
-
-    def test_0_3(self):
-        self.assertTrue(self.graph.is_there_route_between(0, 3))
+    def test_0_4(self):
+        self.assertFalse(self.graph.is_there_route_between(0, 4))
 
 
 if __name__ == "__main__":
