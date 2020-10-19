@@ -8,7 +8,7 @@ import math
 
 def possible_subsets(A):
     """
-    We know that there are 2^N possibme subsets of any given set with N elements
+    We know that there are 2^N possible subsets of any given set with N elements
     """
     N = len(A)
 
