@@ -1,62 +1,68 @@
 """
 Python program to represent the adjacency list representation of the graph
 """
-
-
-class AdjNode:
-    def __init__(self, data):
-        self.vertex = data
-        self.next = None
-
-    def get_vertex(self):
-        return self.vertex
-
-    def get_next(self):
-        return self.next
-
-    def set_next(self, new_next):
-        self.next = new_next
+from collections import defaultdict
 
 
 class Graph:
-    def __init__(self, vertices):
-        self.V = vertices
-        # size of the array will be the number of the vertices
-        self.graph = [None] * self.V
+    def __init__(self):
+        self.graph = defaultdict(list)
 
-    # Function to add an edge in an undirected graph
     def add_edge(self, src, dest):
-        # Adding the node to the source node
-        node = AdjNode(dest)
-        node.next = self.graph[src]
-        self.graph[src] = node
+        self.graph[src].append(dest)
 
-        # Adding the source node to the destination as
-        # it is the undirected graph
-        node = AdjNode(src)
-        node.next = self.graph[dest]
-        self.graph[dest] = node
+    def breath_first_search(self, src):
+        """Visits each of a's neighbors before visiting any of their neighbors"""
+        # Mark all vertices as not visited
+        visited = [False] * (max(self.graph) + 1)
 
-    # Function to print the graph
-    def print_graph(self):
-        for i in range(self.V):
-            print("Adjacency list of vertex {}\n head".format(i), end="")
-            temp = self.graph[i]
-            while temp:
-                print(" -> {}".format(temp.vertex), end="")
-                temp = temp.next
-            print(" \n")
+        queue = []
+
+        # mark the source node as visited and enqueue
+        visited[src] = True
+        queue.append(src)
+
+        while queue:
+            # dequeue a vertex from the queue and enqueue it
+            r = queue.pop(0)
+            print(r, end=" ")
+
+            # if an adjacent vertext has not been visited,
+            # mark it as visited then enqueue it
+            for i in self.graph[r]:
+                if visited[i] == False:
+                    visited[i] = True
+                    queue.append(i)
+
+    def _depth_first_search(self, src, visited):
+        # mark the source node as visited
+        print(src, end=" ")
+        visited.add(src)
+
+        for i in self.graph[src]:
+            if i not in visited:
+                self._depth_first_search(i, visited)
+
+    def depth_first_search(self, src):
+        """
+        When visiting a node b that is a neighbor of a, we visit all of b's neighbors
+        before going on to a's other neighbors.
+        """
+        visited = set()
+
+        self._depth_first_search(src, visited)
 
 
 if __name__ == "__main__":
-    V = 5
-    graph = Graph(V)
+    graph = Graph()
     graph.add_edge(0, 1)
-    graph.add_edge(0, 4)
+    graph.add_edge(0, 2)
     graph.add_edge(1, 2)
-    graph.add_edge(1, 3)
-    graph.add_edge(1, 4)
+    graph.add_edge(2, 0)
     graph.add_edge(2, 3)
-    graph.add_edge(3, 4)
+    graph.add_edge(3, 3)
 
-    graph.print_graph()
+    print('BFS')
+    graph.breath_first_search(2)
+    print('DFS')
+    graph.depth_first_search(2)

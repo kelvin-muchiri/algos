@@ -1,9 +1,10 @@
-    class BinaryTree:
+class BinaryTree:
     """
     Tree implementation using nodes and references.
     Left and right will become references of other
     instances of the class
     """
+
     def __init__(self, rootObj):
         self.key = rootObj
         self.leftChild = None
@@ -72,6 +73,7 @@ def in_order(node):
         print(node.getRootVal())
         in_order(node.getRightChild())
 
+
 def pre_order(node):
     """Visit the root node first, then left, then right.
     Visit the current node before its children nodes hence the name pre-order."""
@@ -80,6 +82,7 @@ def pre_order(node):
         pre_order(node.getLeftChild())
         pre_order(node.getRightChild())
 
+
 def post_order(node):
     """Visit the left branch, then the right, then the root.
     Visit the current node after its children nodes hence the name post-order."""
@@ -87,4 +90,3 @@ def post_order(node):
         post_order(node.getLeftChild())
         post_order(node.getRightChild())
         print(node.getRootVal())
-
