@@ -39,51 +39,25 @@ class TreeNode:
         return self.left
 
 
+def _created_bst(alist, low, high):
+    if low > high:
+        return None
+
+    mid = (high + low) // 2
+
+    if (low + high) % 2:
+        mid += 1
+
+    root = TreeNode(alist[mid])
+    root.left = _created_bst(alist, low, mid - 1)
+    root.right = _created_bst(alist, mid + 1, high)
+    return root
+
+
 def create_bst(alist):
     """Create a binary search tree given a sorted array"""
 
-    if len(alist) == 1:
-        return TreeNode(alist[0])
-
-    if len(alist) == 2:
-        node = TreeNode(alist[1])
-        node.insert_left(alist[0])
-        return node
-
-    if len(alist) == 3:
-        node = TreeNode(alist[1])
-        node.insert_left(alist[0])
-        node.insert_right(alist[2])
-        return node
-
-    mid = len(alist) // 2
-    median_node = TreeNode(alist[mid])
-    left_node = TreeNode(alist[mid - 2])
-    right_node = TreeNode(alist[mid + 1])
-
-    i = mid - 2
-
-    if i == 0:
-        left_node.insert_right(alist[i + 1])
-
-    else:
-        while i > 0:
-            left_node.insert_right(alist[i + 1])
-            left_node.insert_left(alist[i - 1])
-
-            i -= 1
-
-    j = mid + 2
-
-    while j < len(alist):
-        right_node.insert_right(alist[j])
-
-        j += 1
-
-    median_node.left = left_node
-    median_node.right = right_node
-
-    return median_node
+    return _created_bst(alist, 0, len(alist) - 1)
 
 
 def in_order(node, result):
