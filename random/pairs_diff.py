@@ -8,18 +8,17 @@ import unittest
 
 
 def difference_count(k, alist):
-    lookup = {}
+    lookup = set()
     pairs = []
 
     for i in range(len(alist)):
-        if not lookup.get(alist[i]):
-            lookup[alist[i]] = alist[i]
+        lookup.add(alist[i])
 
     for i in range(len(alist)):
         one = alist[i]
         two = abs(k + alist[i])
 
-        if lookup.get(two):
+        if two in lookup:
             pairs.append((one, two))
 
     print(pairs)
