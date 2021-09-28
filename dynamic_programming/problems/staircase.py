@@ -40,7 +40,7 @@ def find_step_recursive(n):
         return find_step_recursive(n - 3) + find_step_recursive(n - 2) + find_step_recursive(n - 1)
 
 
-lookup = []
+lookup = {}
 
 
 def find_step_recursive_dynamic_bottom_up(n):
@@ -59,7 +59,7 @@ def find_step_recursive_dynamic_bottom_up(n):
     return lookup[n]
 
 
-topDownLookup = []
+topDownLookup = {}
 
 
 def find_step_recursive_dynamic_top_down(n):
@@ -70,7 +70,7 @@ def find_step_recursive_dynamic_top_down(n):
         return 2
 
     else:
-        if n not in topDownLookup:
+        if not n in topDownLookup:
             topDownLookup[n] = find_step_recursive_dynamic_top_down(
                 n - 3) + find_step_recursive_dynamic_top_down(n - 2) + find_step_recursive_dynamic_top_down(n - 1)
 

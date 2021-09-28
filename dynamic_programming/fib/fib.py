@@ -8,7 +8,7 @@ def fib(n):
     return fib(n - 1) + fib(n - 2)
 
 
-F = []
+F = {}
 
 
 def fib_dynamic(n):
@@ -25,7 +25,7 @@ def fib_dynamic(n):
     return F[n]
 
 
-bottomUpLookUp = []
+bottomUpLookUp = {}
 
 
 def fib_dynamic_bottom_up(n):
