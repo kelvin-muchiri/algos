@@ -18,6 +18,9 @@ time.
 Analysis:
 
 T(n) = T(k) + T(n-k-1) + O(n)
+
+https://www.youtube.com/watch?v=7h1s2SojIRw
+https://stackabuse.com/quicksort-in-python/
 """
 import unittest
 
@@ -28,23 +31,24 @@ def partition(arr, low, high):
     position, place all smaller elements to the left, larger elements
     to the right.
     """
-    pivot = arr[high]
-    i = low - 1  # Index of smaller element
-    j = low  # Current element
+    pivot = arr[low]
+    i = low + 1
+    j = high
 
-    while j < high:
-        if arr[j] < pivot:
-            # Current elment is smaller than or equal to pivot
-            # Swap current element with arr[i]. Otherwise
-            # ignore current element
+    while i <= j:
+        while i <= j and arr[i] < pivot:
             i += 1
+
+        while i <= j and arr[j] > pivot:
+            j -= 1
+
+        if i < j:
             arr[i], arr[j] = arr[j], arr[i]
 
-        j += 1
+    arr[low], arr[j] = arr[j], arr[low]
 
-    # Now have pivot in its place
-    arr[i + 1], arr[high] = arr[high], arr[i + 1]
-    return i + 1
+    # return the position where the paritioning is done
+    return j
 
 
 def quicksort(arr, low, high):
@@ -65,11 +69,11 @@ class QuickSortTestCase(unittest.TestCase):
         arr = [1, 5, 7, 8, 9, 10]
         quicksort(arr, 0, len(arr) - 1)
         self.assertEqual(arr,  [1, 5, 7, 8, 9, 10])
-    
+
     def test_negative_numbers(self):
-        arr = [-1,2,-8,-10]
+        arr = [-1, 2, -8, -10]
         quicksort(arr, 0, len(arr) - 1)
-        self.assertEqual(arr, [-10,-8,-1,2])
+        self.assertEqual(arr, [-10, -8, -1, 2])
 
 
 if __name__ == "__main__":
