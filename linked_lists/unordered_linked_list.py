@@ -1,3 +1,7 @@
+
+"""
+For a singly linked list, it is not possible to access nodes that precede a node
+"""
 from linked_lists.node import Node
 
 
