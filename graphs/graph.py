@@ -12,14 +12,28 @@ class Graph:
         self.graph[src].append(dest)
 
     def breath_first_search(self, src):
-        """Visits each of a's neighbors before visiting any of their neighbors"""
-        # Mark all vertices as not visited
-        visited = [False] * (max(self.graph) + 1)
+        """Visits each of a's neighbors before visiting any of their neighbors
 
+        Time complexity: O(V + E)
+        Space complexity: O(V)
+
+        Applications:
+
+        1. Shortest path
+        2. Peer to peer network
+        3. Crawlers in search engine
+        4. Social networking sites
+        5. GPS Navigation systems - find all neighbouring locations
+        6. Broadcasting in network - a broadcasted packet follows BFS to reach
+        all nodes
+        7. Garbage collection
+        """
+        # Mark all vertices as not visited
+        visited = set()
         queue = []
 
         # mark the source node as visited and enqueue
-        visited[src] = True
+        visited.add(src)
         queue.append(src)
 
         while queue:
@@ -30,8 +44,8 @@ class Graph:
             # if an adjacent vertext has not been visited,
             # mark it as visited then enqueue it
             for i in self.graph[r]:
-                if visited[i] == False:
-                    visited[i] = True
+                if i not in visited:
+                    visited.add(i)
                     queue.append(i)
 
     def _depth_first_search(self, src, visited):
@@ -47,6 +61,21 @@ class Graph:
         """
         When visiting a node b that is a neighbor of a, we visit all of b's neighbors
         before going on to a's other neighbors.
+
+        Time complexity: O(V + E) where V is the number of vertices and E
+        is the number of edges in the graph
+        Space comlexity: O(V) set of size V is needed
+
+        Applications:
+
+        1. Detecting cycle in graph
+        2. Find if there is a path between 2 vertices
+        3. Topological sorting
+        4. Test if graph is biparite
+        5. Finding strongly connected components of a graph - If there is a path
+        from  each vertex to every other vertex
+        6. Solving puzzles with only one solution - include
+        only nodes on the current path in the visited set
         """
         visited = set()
 
