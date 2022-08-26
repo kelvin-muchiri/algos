@@ -71,6 +71,11 @@ class UnorderedList:
         """
         Add a new item to the end of the list
         """
+
+        if self.isEmpty():
+            self.add(item)
+            return
+
         current = self.head
         previous = None
 
@@ -79,7 +84,6 @@ class UnorderedList:
             current = current.get_next()
 
         temp = Node(item)
-        temp.set_next(current)
 
         if previous == None:
             self.head.set_next(temp)

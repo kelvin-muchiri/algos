@@ -90,23 +90,6 @@ class OrderedList:
         else:
             previous.set_next(current.get_next())
 
-    def append(self, item):
-        """
-        Add a new item to the end of the list
-        """
-        current = self.head
-        previous = None
-        while current != None:
-            previous = current
-            current = current.get_next()
-        temp = Node(item)
-        if previous == None:
-            current.set_next(temp)
-            self.head = current
-        else:
-            temp.set_next(current)
-            previous.set_next(temp)
-
     def index(self, item):
         """
         Returns the position of the item in the list if item
@@ -128,7 +111,7 @@ class OrderedList:
     def insert(self, pos, item):
         """
         Adds a new item to the list at position pos. Assumption is that
-        item is not in the list, and there are enought items to have
+        item is not in the list, and there are enough items to have
         position pos
         """
         current = self.head
