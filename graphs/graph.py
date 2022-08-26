@@ -14,8 +14,9 @@ class Graph:
     def breath_first_search(self, src):
         """Visits each of a's neighbors before visiting any of their neighbors
 
-        Time complexity: O(V + E)
-        Space complexity: O(V)
+        Time complexity: O(V + E) where V is the number of vertices and E
+        is the number of edges in the graph
+        Space comlexity: O(V) set of size V is needed
 
         Applications:
 
