@@ -3,16 +3,17 @@ Write a method to return all subsets of a set.
 """
 
 
-def possible_subsets(A, index):
+def possible_subsets(arr, index):
     all_subsets = []
 
-    if len(A) == index:
+    if len(arr) == index:
+
         # Base case add empty set
         all_subsets.append([])
 
     else:
-        all_subsets = possible_subsets(A, index + 1)
-        item = A[index]
+        all_subsets = possible_subsets(arr, index + 1)
+        item = arr[index]
         more_subsets = []
 
         for subset in all_subsets:
