@@ -37,7 +37,7 @@ class Graph:
         queue.append(src)
 
         while queue:
-            # dequeue a vertex from the queue and enqueue it
+            # dequeue a vertex from the queue and print it
             r = queue.pop(0)
             print(r, end=" ")
 
