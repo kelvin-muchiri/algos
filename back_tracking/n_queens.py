@@ -22,23 +22,39 @@ def printSolution(board):
         print()
 
 
+# A utility function to check if a queen can
+# be placed on board[row][col]. Note that this
+# function is called when "col" queens are
+# already placed in columns from 0 to col -1.
+# So we need to check only left side for
+# attacking queens
 def is_safe(board, row, col):
-    # Check row on the left side
+    # check row on the left side
     for i in range(col):
-        if board[row][i] == 1:
+        if board[row][i]:
             return False
 
-    # Check upper diagonal on left side
-    for i, j in zip(range(row, -1, -1),
-                    range(col, -1, -1)):
-        if board[i][j] == 1:
+    # check upper diagonal on the left side
+    i = row - 1
+    j = col - 1
+
+    while i >= 0 and j >= 0:
+        if board[i][j]:
             return False
 
-    # Check lower diagonal on left side
-    for i, j in zip(range(row, N, 1),
-                    range(col, -1, -1)):
-        if board[i][j] == 1:
+        i -= 1
+        j -= 1
+
+    # check lower diagonal on the left side
+    i = row + 1
+    j = col - 1
+
+    while i < N and j >= 0:
+        if board[i][j]:
             return False
+
+        i += 1
+        j -= 1
 
     return True
 
@@ -62,7 +78,7 @@ def solveNQUtil(board, col):
             # If placing queen in board[i][col
             # doesn't lead to a solution, then
             # queen from board[i][col]
-            board[i][col] = 0
+            board[i][col] = 0  # Backtrack
 
     # if the queen can not be placed in any row in
     # this colum col then return false

@@ -59,6 +59,11 @@ class MergeSortTestCase(unittest.TestCase):
         mergesort(arr)
         self.assertEqual(arr,  [1, 5, 7, 8, 9, 10])
 
+    def test_string(self):
+        arr = ['CBA', 'BAC', 'ABC', 'ACB', 'BCA', 'CAB']
+        mergesort(arr)
+        self.assertEqual(arr,  ['ABC', 'ACB', 'BAC', 'BCA', 'CAB', 'CBA'])
+
 
 if __name__ == "__main__":
     unittest.main()
