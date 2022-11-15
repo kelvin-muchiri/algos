@@ -1,6 +1,17 @@
 
 """
 For a singly linked list, it is not possible to access nodes that precede a node
+
+Factors to consider when choosing between an array and a linked list:
+
+1. Size of data
+2. Most frequent operations
+3. Memory utilization
+
+References:
+https://www.youtube.com/watch?v=lC-yYCOnN8Q&ab_channel=mycodeschool
+https://www.youtube.com/watch?v=dmb1i4oN5oE&ab_channel=Jenny%27slecturesCS%2FITNET%26JRF
+https://www.youtube.com/watch?v=dmb1i4oN5oE
 """
 from linked_lists.node import Node
 
