@@ -9,10 +9,11 @@ def binary_search(arr, start, end, num):
     while start <= end:
         mid = start + (end - start) // 2
 
-        if arr[mid] < num:
-            start = mid + 1
-        elif arr[mid] == num:
+        if arr[mid] == num:
             return mid
+
+        if num > arr[mid]:
+            start = mid + 1
         else:
             end = mid - 1
 
