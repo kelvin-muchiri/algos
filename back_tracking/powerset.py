@@ -11,6 +11,7 @@ Note: The left recursion is always executed first
 References:
 https://www.youtube.com/watch?v=REOH22Xwdkk
 https://www.youtube.com/watch?v=rYkfBRtMJr8
+https://www.youtube.com/watch?v=NA2Oj9xqaZQ&ab_channel=Coderbyte
 """
 
 
@@ -25,22 +26,14 @@ class Solution:
                 res.append(subset.copy())
                 return
 
-            # decision to include nums[i]
+            # decision to include current element nums[i]
             subset.append(nums[i])
             dfs(i + 1)
 
-            # decision not to include nums[i]
+            # decision not to include current element nums[i]
             subset.pop()  # pop the element we've just added
             dfs(i + 1)
 
         dfs(0)
 
         return res
-
-
-if __name__ == "__main__":
-    N = 4
-    board = [[0 for j in range(N)] for i in range(N)]
-
-    for i in range(N):
-        print(board[i])

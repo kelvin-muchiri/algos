@@ -4,6 +4,7 @@ References:
 https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/
 https://www.youtube.com/watch?v=GuTPwotSdYw&ab_channel=takeUforward
 https://www.youtube.com/watch?v=YK78FU5Ffjw&ab_channel=takeUforward
+https://byjus.com/maths/difference-between-permutation-and-combination/
 
 Time complexity:
 O(n*n!) Note that there are n! permutations and it requires O(n) time to print a permutation.
