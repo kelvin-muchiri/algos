@@ -78,17 +78,11 @@ class MinIntHeap:
 
     def has_left_child(self, index):
         """Check if has left child"""
-        return self._has_left_child(index, self.size)
-
-    def _has_left_child(self, index, array_size):
-        return self.get_left_child_index(index) < array_size
+        return self.get_left_child_index(index) < self.size
 
     def has_right_child(self, index):
         """Check if has right child"""
-        return self._has_right_child(index, self.size)
-
-    def _has_right_child(self, index, array_size):
-        return self.get_right_child_index(index) < array_size
+        return self.get_right_child_index(index) < self.size
 
     def has_parent(self, index):
         """Check if has parent"""
@@ -126,7 +120,12 @@ class MinIntHeap:
             raise Exception('Heap is empty')
 
         item = self.items[0]
-        self.items[0] = self.items.pop()
+
+        if self.size == 1:
+            self.items = []
+        else:
+            self.items[0] = self.items.pop()
+
         self.size -= 1
         self.heapfiy_down()
         return item
@@ -161,22 +160,24 @@ class MinIntHeap:
         """
         self._heapify_down(0, self.items, self.size)
 
-    def _heapify_down_util(self, index, array, heap_size):
+    def _heapify_down_util(self, index):
         stop = False
 
         # we only check for left child since if no left child, right child
         # is not present (remember heap is filled from top-bottom then left-right)
-        while self._has_left_child(index, heap_size) and not stop:
+        while self.has_left_child(index) and not stop:
             smaller_child_index = self.get_left_child_index(index)
 
-            if self._has_right_child(index, heap_size) and \
-                    array[self.get_right_child_index(index)] < array[self.get_left_child_index(index)]:
+            if self.has_right_child(index) and \
+                    self.get_right_child(index) < self.get_left_child(index):
                 smaller_child_index = self.get_right_child_index(index)
 
-            if array[index] < array[smaller_child_index]:
+            # we do <= instead of < to ensure we stop and avoid unnecessary swaps
+            # when there are duplicates
+            if self.items[index] <= self.items[smaller_child_index]:
                 stop = True
             else:
-                swap(index, smaller_child_index, array)
+                swap(index, smaller_child_index, self.items)
 
             index = smaller_child_index
 
@@ -198,20 +199,24 @@ class MinIntHeap:
         """Build heap from an array of integers
 
         Start from right to left and for each element, bubble down element until
-        min heap property
+        min heap property. Using this approach, the leaf nodes therefore do not
+        need to be heapfied since they do not have children. We start heapfiying
+        from parent of last node
 
         Ref: https://youtu.be/HqPJF2L5h9U?t=2666
 
         Time complexity: O(n)
         """
-        i = len(initial_array) - 1
-        items = initial_array.copy()
+        self.size = len(initial_array)
+        self.items = initial_array.copy()
+        # we start heapifying from parent of last node
+        parent_index_of_last_node = self.get_parent_index(
+            len(initial_array) - 1)
+        i = parent_index_of_last_node
 
         while i >= 0:
-            self._heapify_down_util(i, items, len(items))
+            self._heapify_down_util(i)
             i -= 1
-
-        self.items = items
 
         return self.items
 
@@ -224,6 +229,23 @@ class MinIntHeap:
         else then bubble it down until min heap property is restored
         """
         pass
+
+    def find_maximum_element(heap, n):
+        """
+        Returns maximum element in a min heap
+
+        A min heap requires that the parent node be lesser than children node.
+        Therefore, a non-leaf node cannot be the maximum element. We narrow
+        our search only to leaf nodes, ceil(n/2)
+        The time and space complexity remains O(n) as a constant factor of 1/2
+        does not affect the asymptotic complexity.
+        """
+        max_element = heap[n // 2]
+
+        for i in range(1 + n // 2, n):
+            max_element = max(max_element, heap[i])
+
+        return max_element
 
 
 class MinIntHeapTestCase(unittest.TestCase):
