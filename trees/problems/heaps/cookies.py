@@ -58,14 +58,10 @@ class MinIntHeap:
 
     def poll(self):
         item = self.items[0]
-
-        if self.size == 1:
-            self.items = []
-        else:
-            self.items[0] = self.items.pop()
-
+        self.items[0] = self.items[-1]
         self.size -= 1
-        self.heapify_down()
+        self.items.pop()
+        self.heapfiy_down()
         return item
 
     def insert(self, item):

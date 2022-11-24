@@ -44,12 +44,13 @@ References:
 https://www.youtube.com/watch?v=t0Cq6tVNRBA&ab_channel=HackerRank
 https://www.geeksforgeeks.org/applications-advantages-and-disadvantages-of-heap/
 https://www.youtube.com/watch?v=HqPJF2L5h9U&ab_channel=AbdulBari
+https://docs.python.org/3/library/heapq.html
 """
 import unittest
 
 
 def swap(i, j, array):
-    """Swap the values of two indices"""
+    """Swap the values of two indices in place"""
     array[i], array[j] = array[j], array[i]
 
 
@@ -120,13 +121,9 @@ class MinIntHeap:
             raise Exception('Heap is empty')
 
         item = self.items[0]
-
-        if self.size == 1:
-            self.items = []
-        else:
-            self.items[0] = self.items.pop()
-
+        self.items[0] = self.items[-1]
         self.size -= 1
+        self.items.pop()
         self.heapfiy_down()
         return item
 
