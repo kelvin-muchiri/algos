@@ -1,6 +1,8 @@
 """"
 Heaps
 
+Since a heap is a complete binary tree, we generally use arrays to store them
+
 parent = (index - 1) / 2
 left = index * 2 + 1
 right = index * 2 + 2
@@ -52,6 +54,10 @@ def swap(i, j, array):
 
 
 class MinIntHeap:
+    """"
+    Minumum heap implementation
+    """
+
     def __init__(self):
         # heap items
         self.items = []
@@ -208,6 +214,16 @@ class MinIntHeap:
         self.items = items
 
         return self.items
+
+    def delete(index):
+        """
+        Delete the item at i-th node
+
+        Replace element at index with the last element, decrement the heap size and now starting
+        from the current position index shift it up in case newly replaced item is less than the parent
+        else then bubble it down until min heap property is restored
+        """
+        pass
 
 
 class MinIntHeapTestCase(unittest.TestCase):
