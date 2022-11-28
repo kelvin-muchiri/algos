@@ -165,3 +165,13 @@ class UnorderedList:
 
     def reverse(self):
         """Reverses the linked list"""
+        current = self.head
+        prev = None
+
+        while current is not None:
+            next_node = current.get_next()
+            current.set_next(prev)
+            prev = current
+            current = next_node
+
+        self.head = prev
