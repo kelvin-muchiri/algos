@@ -13,16 +13,15 @@ Rotations are always done within 3 nodes
 https://www.youtube.com/watch?v=jDM6_TnYIqE&ab_channel=AbdulBari
 https://www.geeksforgeeks.org/insertion-in-an-avl-tree/
 """
-
-import bst
 import nodes
 
 
 class TreeNode:
-    def __init__(self, data, left=None, right=None):
+    def __init__(self, data):
         self.data = data
-        self.left = left
-        self.right = right
+        self.left = None
+        self.right = None
+        self.height = 1
 
 
 class AVLTree:
@@ -31,7 +30,23 @@ class AVLTree:
     def insert_node(self, root, node):
         """Insert node into an AVL"""
         # normal BST insert
-        bst.insert_node(root, node)
+        if root is None:
+            root = node
+        else:
+            if node.data <= root.data:
+                if root.left is None:
+                    root.left = node
+                else:
+                    self.insert_node(root.left, node)
+            else:
+                if root.right is None:
+                    root.right = node
+                else:
+                    self.insert_node(root.right, node)
+
+        # Update the height of the ancestor node
+        root.height = 1 + max(self.get_height(root.left),
+                              self.get_height(root.right))
         # get the balance factor
         balance_factor = self.get_balance_factor(root)
 
@@ -55,10 +70,16 @@ class AVLTree:
 
     def get_balance_factor(self, root):
         """Get the balance factor"""
-        left_height = nodes.find_height(root.left)
-        right_height = nodes.find_height(root.right)
+        if root is None:
+            return 0
 
-        return left_height - right_height
+        return self.get_height(root.left) - self.get_height(root.right)
+
+    def get_height(self, root):
+        if root is None:
+            return -1
+
+        return root.height
 
     def left_rotate(self, z):
         y = z.right
@@ -67,6 +88,12 @@ class AVLTree:
         # Perform rotation
         y.left = z
         z.right = T2
+
+        # Update heights
+        z.height = 1 + max(self.get_height(z.left),
+                           self.get_height(z.right))
+        y.height = 1 + max(self.get_height(y.left),
+                           self.get_height(y.right))
 
         return y
 
@@ -77,6 +104,12 @@ class AVLTree:
         # Perform rotation
         y.right = z
         z.left = T3
+
+        # Update heights
+        z.height = 1 + max(self.get_height(z.left),
+                           self.get_height(z.right))
+        y.height = 1 + max(self.get_height(y.left),
+                           self.get_height(y.right))
 
         return y
 
