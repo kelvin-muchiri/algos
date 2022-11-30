@@ -125,3 +125,40 @@ def post_order(node):
         post_order(node.getLeftChild())
         post_order(node.getRightChild())
         print(node.getRootVal())
+
+
+def breadth_first_traversal(root):
+    """Level order traversal
+
+    Time complexity: O(n)
+    Space complexity: O(1) for skewed tree (only one element will be
+    in the queue at a time), O(n) for balanced tree
+    """
+    queue = []
+    queue.append(root)
+
+    while queue:
+        node = queue.pop(0)
+
+        print(node.getRootVal())
+
+        if node.left:
+            queue.append(node.left)
+
+        if node.right:
+            queue.append(node.right)
+
+
+def find_height(root):
+    """The max of the height of left and right subtrees plus 1
+    https://www.youtube.com/watch?v=_pnqMz5nrRs&ab_channel=mycodeschool
+
+    Time complexity: O(n)
+    """
+    if root is None:
+        return -1
+
+    left_height = find_height(root.left)
+    right_height = find_height(root.right)
+
+    return max(left_height, right_height) + 1
