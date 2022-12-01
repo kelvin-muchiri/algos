@@ -90,6 +90,13 @@ def find_min(root):
     return find_min(root.left)
 
 
+def find_min_value_node(root):
+    if root is None or root.left is None:
+        return root
+
+    return find_min_value_node(root.left)
+
+
 def find_max(root):
     if root is None:
         return -1
@@ -152,7 +159,7 @@ def delete_node(root, data):
 
         # case 4: Has 2 children
         else:
-            min_right_node = find_min(root.right)
+            min_right_node = find_min_value_node(root.right)
             root.data = min_right_node.data
             root.right = delete_node(root.right, min_right_node.data)
 
