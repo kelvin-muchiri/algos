@@ -51,12 +51,13 @@ def insert_node(root, node):
             if root.left is None:
                 root.left = node
             else:
-                insert_node(root.left, node)
+                root.left = insert_node(root.left, node)
         else:
             if root.right is None:
                 root.right = node
             else:
-                insert_node(root.right, node)
+                root.right = insert_node(root.right, node)
+    return root
 
 
 def in_order_traversal(root):
@@ -143,11 +144,11 @@ def delete_node(root, data):
             root = None
         # case 2: One child, has right child only
         elif root.left is None:
-            root = root.right  # make right new root of subtree
+            root = root.right  # replace root with right child
 
         # case 3: One child, has left child only
         elif root.right is None:
-            root = root.left  # make left new left of subtree
+            root = root.left  # replace root with left child
 
         # case 4: Has 2 children
         else:

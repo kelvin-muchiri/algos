@@ -12,6 +12,7 @@ Rotations are always done within 3 nodes
 
 https://www.youtube.com/watch?v=jDM6_TnYIqE&ab_channel=AbdulBari
 https://www.geeksforgeeks.org/insertion-in-an-avl-tree/
+https://www.youtube.com/watch?v=kD_xn7mZ6v8&ab_channel=LalithaNatraj
 """
 import nodes
 
@@ -37,12 +38,12 @@ class AVLTree:
                 if root.left is None:
                     root.left = node
                 else:
-                    self.insert_node(root.left, node)
+                    root.left = self.insert_node(root.left, node)
             else:
                 if root.right is None:
                     root.right = node
                 else:
-                    self.insert_node(root.right, node)
+                    root.right = self.insert_node(root.right, node)
 
         # Update the height of the ancestor node
         root.height = 1 + max(self.get_height(root.left),
@@ -77,7 +78,8 @@ class AVLTree:
 
     def get_height(self, root):
         if root is None:
-            return -1
+            # height of external (nil) nodes is 0
+            return 0
 
         return root.height
 
