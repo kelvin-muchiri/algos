@@ -109,6 +109,8 @@ def find_max(root):
 
 def is_binary_search_tree_util(root, min_val, max_val):
     if root is None:
+        # we've reached the leaf node, no violation
+        # was encountered
         return True
 
     return root.data > min_val and root.data < max_val and \
