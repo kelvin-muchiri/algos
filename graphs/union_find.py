@@ -23,8 +23,10 @@ def find_optmized(parent_list: List[int], v: int):
 
     Gurantees that successive finds after the first find are optimized
     """
-    if parent_list[v] != -1:
-        parent_list[v] = find_optmized(parent_list, parent_list[v])
+    if parent_list[v] == -1:
+        return v
+
+    parent_list[v] = find_optmized(parent_list, parent_list[v])
 
     return parent_list[v]
 
