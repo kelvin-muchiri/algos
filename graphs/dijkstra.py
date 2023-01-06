@@ -1,3 +1,17 @@
+"""
+Dijkstras algorithm for finding the shortest path from source vertex to every other vertex.
+
+f we are interested only in the shortest distance from the source to a single target,
+break them for a loop when the picked minimum distance vertex is equal to the target.
+
+Algorithm works for both directed and undirectd graphs
+
+References:
+https://www.youtube.com/watch?v=pVfj6mxhdMw
+https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/
+"""
+
+
 import math
 from typing import List, Optional, Dict
 import unittest
