@@ -110,3 +110,12 @@ def find_height(root):
     right_height = find_height(root.right)
 
     return max(left_height, right_height) + 1
+
+
+def invert_binary_tree(root):
+    if root is None:
+        return
+
+    root.left, root.right = root.right, root.left
+    invert_binary_tree(root.left)
+    invert_binary_tree(root.right)

@@ -1,3 +1,21 @@
+"""
+Characteristics of Dynamic Programming probles
+    1. Optimal substructure - For a problem, we get to the solution by finding the optimal
+    solution to each subproblem
+    2. Overlapping subproblems - Problem can be broken down into smaller parts which
+    need to be solved again and again
+
+Optimal solution to each subproblem is stored so that it is not re-computed again
+
+Approaches to dynamic programming:
+    1. Memoization or Top-down DP (recursion is used)
+    2. Tabulation or Bottom-up DP (iterative approach is used)
+
+References:
+https://www.scaler.com/topics/data-structures/dynamic-programming/?utm_medium=direct&utm_source=none/
+"""
+
+
 def fib(n):
     if n == 0:
         return 0
