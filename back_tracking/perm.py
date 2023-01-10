@@ -2,7 +2,7 @@
 
 References:
 https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/
-https://www.youtube.com/watch?v=GuTPwotSdYw&ab_channel=takeUforward
+https://www.youtube.com/watch?v=GuTPwotSdYw&ab_channel=TECHDOSE
 https://www.youtube.com/watch?v=YK78FU5Ffjw&ab_channel=takeUforward
 https://byjus.com/maths/difference-between-permutation-and-combination/
 
@@ -41,22 +41,22 @@ class Solution2:
     def permute(self, string):
         ans = []
         ds = []
-        freq = [False for i in range(len(string))]
-        self.recur_permute(list(string), ds, ans, freq)
+        taken = [False for i in range(len(string))]
+        self.recur_permute(list(string), ds, ans, taken)
         return ans
 
-    def recur_permute(self, string, ds, ans, freq):
+    def recur_permute(self, string, ds, ans, taken):
         if len(ds) == len(string):
             ans.append("".join(ds))
             return
 
         for i in range(len(string)):
-            if not freq[i]:
-                freq[i] = True
+            if not taken[i]:
+                taken[i] = True
                 ds.append(string[i])
-                self.recur_permute(string, ds, ans, freq)
+                self.recur_permute(string, ds, ans, taken)
                 ds.pop()
-                freq[i] = False
+                taken[i] = False
 
 
 # Driver program to test the above function
