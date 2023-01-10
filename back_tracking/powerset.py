@@ -18,21 +18,22 @@ https://www.youtube.com/watch?v=NA2Oj9xqaZQ&ab_channel=Coderbyte
 class Solution:
 
     def subsets(self, nums):
+        """Time complexity O(n x 2^n)"""
         res = []
         subset = []
 
-        def dfs(i):
-            if i == len(nums):
+        def dfs(index):
+            if index == len(nums):
                 res.append(subset.copy())
                 return
 
             # decision to include current element nums[i]
-            subset.append(nums[i])
-            dfs(i + 1)
+            subset.append(nums[index])
+            dfs(index + 1)
 
             # decision not to include current element nums[i]
             subset.pop()  # pop the element we've just added
-            dfs(i + 1)
+            dfs(index + 1)
 
         dfs(0)
 
