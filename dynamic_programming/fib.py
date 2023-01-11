@@ -26,32 +26,32 @@ def fib(n):
     return fib(n - 1) + fib(n - 2)
 
 
-F = {}
+memo = {}
 
 
 def fib_dynamic(n):
     """Solve fib in a top down approach. Uses memoization"""
-    if n not in F:
+    if n not in memo:
         if n == 0:
-            F[n] = 0
+            memo[n] = 0
         elif n == 1:
-            F[n] = 1
+            memo[n] = 1
 
         else:
-            F[n] = fib_dynamic(n - 1) + fib_dynamic(n - 2)
+            memo[n] = fib_dynamic(n - 1) + fib_dynamic(n - 2)
 
-    return F[n]
+    return memo[n]
 
 
-bottomUpLookUp = {}
+dp = {}
 
 
 def fib_dynamic_bottom_up(n):
     """Solve fib in a bottom up approach. Uses tabulation"""
-    bottomUpLookUp[0] = 0
-    bottomUpLookUp[1] = 1
+    dp[0] = 0
+    dp[1] = 1
 
     for i in range(2, n):
-        bottomUpLookUp[i] = bottomUpLookUp[i - 1] + bottomUpLookUp[i - 2]
+        dp[i] = dp[i - 1] + dp[i - 2]
 
-    return bottomUpLookUp[n]
+    return dp[n]
