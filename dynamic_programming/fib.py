@@ -43,11 +43,9 @@ def fib_dynamic(n):
     return memo[n]
 
 
-dp = {}
-
-
 def fib_dynamic_bottom_up(n):
     """Solve fib in a bottom up approach. Uses tabulation"""
+    dp = [0 for i in range(n + 1)]
     dp[0] = 0
     dp[1] = 1
 
