@@ -5,6 +5,9 @@ Characteristics of Dynamic Programming probles
     2. Overlapping subproblems - Problem can be broken down into smaller parts which
     need to be solved again and again
 
+Note: It is important for a problem to have BOTH the above
+specified characteristics in order to be eligible to be solved using DP technique.
+
 Optimal solution to each subproblem is stored so that it is not re-computed again
 
 Approaches to dynamic programming:
