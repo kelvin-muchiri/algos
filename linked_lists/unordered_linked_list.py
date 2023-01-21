@@ -14,6 +14,7 @@ https://www.youtube.com/watch?v=dmb1i4oN5oE&ab_channel=Jenny%27slecturesCS%2FITN
 https://www.youtube.com/watch?v=dmb1i4oN5oE
 """
 from linked_lists.node import Node
+from typing import Optional
 
 
 class UnorderedList:
@@ -175,3 +176,56 @@ class UnorderedList:
             current = next_node
 
         self.head = prev
+
+    def detect_cycle(self) -> Optional['Node']:
+        """Detect if there is a cycle
+
+        Time complexity: O(n)
+        Space complexity: O(n)
+        """
+
+        current = self.head
+        visited = set()
+
+        while current is not None:
+            if current in visited:
+                return current
+
+            visited.add(current)
+            current = current.get_next()
+
+        return None
+
+    def detect_cycle_floyd(self) -> Optional['Node']:
+        """Detect if there is a cycle
+
+        Detect if there is a cycle using Floyd's algorithm
+
+        Time complexity: O(n)
+        Space complexity: O(1)
+
+        Reference: https://www.youtube.com/watch?v=PvrxZaH_eZ4&ab_channel=Insidecode
+        """
+        slow: Optional['Node'] = self.head
+        fast: Optional['Node'] = self.head
+        met: bool = False
+
+        while fast is not None and fast.get_next_next() is not None:
+            slow = slow.get_next()
+            fast = slow.get_next().get_next()
+
+            if slow == fast:
+                met = True
+                break
+
+        if not met:
+            # hare and tortoise did not meet, no cycle
+            return None
+
+        slow = self.head
+
+        while slow != fast:
+            slow = slow.get_next()
+            fast = fast.get_next()
+
+        return fast
