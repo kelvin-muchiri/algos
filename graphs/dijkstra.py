@@ -1,10 +1,16 @@
 """
 Dijkstras algorithm for finding the shortest path from source vertex to every other vertex.
+Can be used for both directed and undirected graphs
 
-f we are interested only in the shortest distance from the source to a single target,
+if we are interested only in the shortest distance from the source to a single target,
 break them for a loop when the picked minimum distance vertex is equal to the target.
 
 Algorithm works for both directed and undirectd graphs
+
+Limitations:
+Dijkstras algorithm doesnt' work for graphs with negative edges and cycles. For graphs
+with negative edges and cycles use Bellman Ford algorithm
+(https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/)
 
 References:
 https://www.youtube.com/watch?v=pVfj6mxhdMw
