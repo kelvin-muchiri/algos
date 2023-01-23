@@ -29,8 +29,8 @@ class Trie:
     def __init__(self) -> None:
         self.root: 'TrieNode' = TrieNode()
 
-    def insert(self, word: str) -> None:
-        """Iterative implementation of insert into trie"""
+    def insert_iterative(self, word: str) -> None:
+        """Iterative insert"""
         current = self.root
 
         for i in range(len(word)):
@@ -46,8 +46,26 @@ class Trie:
         # mark the end of word as true
         current.is_end_of_word = True
 
-    def search(self, word: str) -> bool:
-        """Iterative implementation of search into trie"""
+    def insert_recursive(self, word: str) -> None:
+        """Recursive insert"""
+        self._insert_recursive_util(self.root, word, 0)
+
+    def _insert_recursive_util(self, current_node: 'TrieNode', word: str, index: int) -> None:
+        if index == len(word):
+            current_node.is_end_of_word = True
+            return
+
+        char = word[index]
+        node = current_node.children.get(char, None)
+
+        if not node:
+            node = TrieNode()
+            current_node[char] = node
+
+        self._insert_recursive_util(node, word, index + 1)
+
+    def search_iterative(self, word: str) -> bool:
+        """Iterative search"""
         current = self.root
 
         for i in range(len(word)):
@@ -61,6 +79,22 @@ class Trie:
 
         return current.is_end_of_word
 
+    def search_recursive(self, word: str) -> bool:
+        """Recursive search"""
+        return self._search_recursive_util(self.root, word, 0)
+
+    def _search_recursive_util(self, current_node: 'TrieNode', word: str, index: int) -> bool:
+        if index == len(word):
+            return current_node.is_end_of_word
+
+        char = word[index]
+        node = current_node.children.get(char, None)
+
+        if not node:
+            return False
+
+        self._insert_recursive_util(node, word, index + 1)
+
     def delete(self, word):
         self._delete_util(self.root, word, 0)
 
@@ -73,6 +107,7 @@ class Trie:
 
             current_node.is_end_of_word = False
             # if current has no other mapping return true
+            # so that the parent can delete reference to node if mapping is is empty
             return len(current_node) == 0
 
         ch = word[index]
