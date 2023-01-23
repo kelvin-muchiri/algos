@@ -13,6 +13,11 @@ Time complexity:
 
     Search: O(l) where l is the length of the word
 
+
+Applications:
+    1. Autocomplete
+    2. Spell checker
+
 References:
 https://www.youtube.com/watch?v=AXjmTQ8LEoI&ab_channel=TusharRoy-CodingMadeSimple
 """
