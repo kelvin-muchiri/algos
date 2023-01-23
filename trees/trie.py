@@ -60,7 +60,7 @@ class Trie:
 
         if not node:
             node = TrieNode()
-            current_node[char] = node
+            current_node.children[char] = node
 
         self._insert_recursive_util(node, word, index + 1)
 
