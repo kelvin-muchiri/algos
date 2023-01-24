@@ -1,5 +1,6 @@
 """
 Dijkstras algorithm for finding the shortest path from source vertex to every other vertex.
+It is a greedy algorithm
 Can be used for both directed and undirected graphs
 
 if we are interested only in the shortest distance from the source to a single target,
@@ -11,6 +12,9 @@ Limitations:
 Dijkstras algorithm doesnt' work for graphs with negative edges and cycles. For graphs
 with negative edges and cycles use Bellman Ford algorithm
 (https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/)
+
+Time complexity: O(V^2) but can be improved to O((V+E) log V) with
+the use of a fibonacci heap
 
 References:
 https://www.youtube.com/watch?v=pVfj6mxhdMw
