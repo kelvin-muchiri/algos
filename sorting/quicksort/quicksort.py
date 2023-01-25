@@ -26,11 +26,6 @@ import unittest
 
 
 def partition(arr, low, high):
-    """
-    Pick last element of array as pivot, place element at its correct
-    position, place all smaller elements to the left, larger elements
-    to the right.
-    """
     pivot = arr[low]
     i = low + 1
     j = high
