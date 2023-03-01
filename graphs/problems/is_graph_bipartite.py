@@ -16,7 +16,6 @@ def isBipartiteBFS(self, graph: List[List[int]]) -> bool:
     Auxiliary space: O(V)
     """
     num_vertices = len(graph)
-    colors: int = 2
     vertex_colors: List[int] = [-1 for i in range(num_vertices)]
 
     def bfs(source_node: int):
