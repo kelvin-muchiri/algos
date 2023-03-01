@@ -11,7 +11,7 @@ class Graph:
     def add_edge(self, src, dest):
         self.graph[src].append(dest)
 
-    def breath_first_search(self, src):
+    def breadth_first_search(self, src):
         """Visits each of a's neighbors before visiting any of their neighbors
 
         Time complexity: O(V + E) where V is the number of vertices and E

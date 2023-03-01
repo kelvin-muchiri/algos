@@ -12,7 +12,7 @@ import graph
 
 def find_naive(parent_list: List[int], v: int) -> int:
     """Find the absolute root for a particular element"""
-    if parent_list[v] == -1:
+    if parent_list[v] == v:
         return v
 
     return find_naive(parent_list, parent_list[v])
@@ -23,7 +23,7 @@ def find_optmized(parent_list: List[int], v: int):
 
     Gurantees that successive finds after the first find are optimized
     """
-    if parent_list[v] == -1:
+    if parent_list[v] == v:
         return v
 
     parent_list[v] = find_optmized(parent_list, parent_list[v])
@@ -76,12 +76,11 @@ def is_cyclic(number_of_vertices: int, graph: 'graph.Graph') -> bool:
     # belong that subset.
     # First create subsets containing a single node which are
     # the parent of itself
-    parent_list = [-1 for i in range(number_of_vertices)]
+    parent_list = [i for i in range(number_of_vertices)]
 
     for u in graph:
-        root_u = find_naive(parent_list, u)
-
         for v in graph[u]:
+            root_u = find_naive(parent_list, u)
             root_v = find_naive(parent_list, v)
             # if two end nodes of an edge belongs to the
             # same set, then they form a cycle
