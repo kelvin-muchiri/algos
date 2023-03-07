@@ -60,22 +60,21 @@ class UnorderedList:
                 current = current.get_next()
         return found
 
-    def remove(self, item):
+    def remove(self, node):
         """
-        Remove an item from the list. Assumption is that the
-        item is in the list
+        Remove a node from the list. Assumption is that the
+        node is in the list
         """
         current = self.head
         previous = None
-        found = False
-        while not found:
-            if current.get_data() == item:
-                found = True
-            else:
-                previous = current
-                current = current.get_next()
-        if previous == None:
+
+        while current != node:
+            previous = current
+            current = current.get_next()
+
+        if previous is None:
             self.head = current.get_next()
+
         else:
             previous.set_next(current.get_next())
 
